@@ -1,0 +1,20 @@
+<assembly>
+	<id>windows-assembly</id>
+	<formats>
+		<format>zip</format>
+	</formats>
+
+	<includeBaseDirectory>false</includeBaseDirectory>
+
+	<files>
+		<file>
+			<source>${project.build.directory}/${project.name}-${project.version}-jar-with-dependencies.jar</source>
+			<outputDirectory>/</outputDirectory>
+		</file>
+
+		<file>
+			<source>${project.build.directory}/openjdk-21-jre-windows.msi</source>
+			<outputDirectory>/</outputDirectory>
+		</file>
+	</files>
+</assembly>

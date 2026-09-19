@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>io.github.machineswillrise</groupId>
+	<artifactId>jmacs</artifactId>
+	<version>1.0.0.0</version>
+
+	<name>jmacs</name>
+	<description>A lightweight and powerful text editor written in Java with AI features.</description>
+	<url>https://machineswillrise.neocities.org</url>
+	<inceptionYear>2026</inceptionYear>
+
+	<licenses>
+		<license>
+			<name>Unlicense</name>
+			<url>https://unlicense.org</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+
+	<developers>
+		<developer>
+			<id>machineswillrise</id>
+			<email>machineswillrise@protonmail.com</email>
+		</developer>
+	</developers>
+
+	<scm>
+		<connection>scm:git:git://github.com/machineswillrise/jmacs.git</connection>
+		<developerConnection>scm:git:ssh://git@github.com:machineswillrise/jmacs.git</developerConnection>
+		<url>https://github.com/machineswillrise/jmacs</url>
+
+	</scm>
+
+	<issueManagement>
+		<system>GitHub</system>
+		<url>https://github.com/machineswillrise/jmacs/issues</url>
+	</issueManagement>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.release>21</maven.compiler.release>
+		<maven.executable>mvn</maven.executable>
+		<mainClass>io.github.machineswillrise.jmacs.JMacs</mainClass>
+
+		<javafx.version>27</javafx.version>
+		<langchain4j.version>1.20.0</langchain4j.version>
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.junit</groupId>
+				<artifactId>junit-bom</artifactId>
+				<version>6.1.3</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<repositories>
+		<repository>
+			<id>jitpack.io</id>
+			<url>https://jitpack.io</url>
+		</repository>
+	</repositories>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>2.0.19</version>
+		</dependency>
+
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>1.6.3</version>
+		</dependency>
+
+		<dependency>
+			<groupId>tools.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>3.2.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>io.github.bonede</groupId>
+			<artifactId>tree-sitter</artifactId>
+			<version>0.26.6</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.eclipse.lsp4j</groupId>
+			<artifactId>org.eclipse.lsp4j</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>dev.langchain4j</groupId>
+			<artifactId>langchain4j</artifactId>
+			<version>${langchain4j.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>dev.langchain4j</groupId>
+			<artifactId>langchain4j-ollama</artifactId>
+			<version>${langchain4j.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.openjfx</groupId>
+			<artifactId>javafx-fxml</artifactId>
+			<version>${javafx.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.controlsfx</groupId>
+			<artifactId>controlsfx</artifactId>
+			<version>11.2.5</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.github.Dansoftowner</groupId>
+			<artifactId>jSystemThemeDetector</artifactId>
+			<version>3.9.1</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-api</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jfxtras</groupId>
+			<artifactId>jmetro</artifactId>
+			<version>11.6.16</version>
+		</dependency>
+	</dependencies>
+
+	<profiles>
+		<profile>
+			<id>windows</id>
+			<activation>
+				<os>
+					<family>windows</family>
+				</os>
+			</activation>
+			<dependencies>
+				<dependency>
+					<groupId>org.openjfx</groupId>
+					<artifactId>javafx-base</artifactId>
+					<version>${javafx.version}</version>
+					<classifier>win</classifier>
+				</dependency>
+				<dependency>
+					<groupId>org.openjfx</groupId>
+					<artifactId>javafx-controls</artifactId>
+					<version>${javafx.version}</version>
+					<classifier>win</classifier>
+				</dependency>
+			</dependencies>
+			<properties>
+				<maven.executable>./mvnw.cmd</maven.executable>
+			</properties>
+		</profile>
+
+		<profile>
+			<id>macos</id>
+			<activation>
+				<os>
+					<family>mac</family>
+				</os>
+			</activation>
+			<dependencies>
+				<dependency>
+					<groupId>org.openjfx</groupId>
+					<artifactId>javafx-base</artifactId>
+					<version>${javafx.version}</version>
+					<classifier>mac</classifier>
+				</dependency>
+				<dependency>
+					<groupId>org.openjfx</groupId>
+					<artifactId>javafx-controls</artifactId>
+					<version>${javafx.version}</version>
+					<classifier>mac</classifier>
+				</dependency>
+			</dependencies>
+		</profile>
+
+		<profile>
+			<id>linux</id>
+			<activation>
+				<os>
+					<family>unix</family>
+				</os>
+			</activation>
+			<dependencies>
+				<dependency>
+					<groupId>org.openjfx</groupId>
+					<artifactId>javafx-base</artifactId>
+					<version>${javafx.version}</version>
+					<classifier>linux</classifier>
+				</dependency>
+				<dependency>
+					<groupId>org.openjfx</groupId>
+					<artifactId>javafx-controls</artifactId>
+					<version>${javafx.version}</version>
+					<classifier>linux</classifier>
+				</dependency>
+			</dependencies>
+		</profile>
+
+		<profile>
+			<id>other</id>
+			<activation>
+				<os>
+					<family>!windows,!mac,!unix</family>
+				</os>
+			</activation>
+			<dependencies>
+				<dependency>
+					<groupId>org.openjfx</groupId>
+					<artifactId>javafx-base</artifactId>
+					<version>${javafx.version}</version>
+				</dependency>
+				<dependency>
+					<groupId>org.openjfx</groupId>
+					<artifactId>javafx-controls</artifactId>
+					<version>${javafx.version}</version>
+				</dependency>
+			</dependencies>
+		</profile>
+	</profiles>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.16.0</version>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>3.6.0</version>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>3.8.0</version>
+				<executions>
+					<execution>
+						<id>make-fat-jar</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+						<configuration>
+							<descriptorRefs>
+								<descriptorRef>jar-with-dependencies</descriptorRef>
+							</descriptorRefs>
+							<archive>
+								<manifest>
+									<mainClass>${mainClass}</mainClass>
+								</manifest>
+							</archive>
+						</configuration>
+					</execution>
+
+					<execution>
+						<id>make-windows-zip</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+						<configuration>
+							<descriptors>
+								<descriptor>src/main/assembly/windows-assembly.xml</descriptor>
+							</descriptors>
+							<appendAssemblyId>false</appendAssemblyId>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.openjfx</groupId>
+				<artifactId>javafx-maven-plugin</artifactId>
+				<version>0.0.8</version>
+				<configuration>
+					<mainClass>${mainClass}</mainClass>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>io.github.download-maven-plugin</groupId>
+				<artifactId>download-maven-plugin</artifactId>
+				<version>2.1.0</version>
+				<executions>
+					<execution>
+						<phase>initialize</phase>
+						<goals>
+							<goal>wget</goal>
+						</goals>
+						<configuration>
+							<url>https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.12.1+1/OpenJDK21U-jre_x64_windows_hotspot_21.0.12.1_1.msi</url>
+							<sha256>536eeb1dc3f743e5932a92e3549430fc75392c5d379101c1456a1c201aa6e66b</sha256>
+							<outputDirectory>${project.build.directory}</outputDirectory>
+							<outputFileName>openjdk-21-jre-windows.msi</outputFileName>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>com.akathist.maven.plugins.launch4j</groupId>
+				<artifactId>launch4j-maven-plugin</artifactId>
+				<version>2.7.0</version>
+				<executions>
+					<execution>
+						<id>l4j-clui</id>
+						<phase>package</phase>
+						<goals>
+							<goal>launch4j</goal>
+						</goals>
+						<configuration>
+							<headerType>gui</headerType>
+							<outfile>${project.build.directory}/${project.name}.exe</outfile>
+							<jar>${project.build.directory}/${project.name}-${project.version}-jar-with-dependencies.jar</jar>
+							<errTitle>${project.name}</errTitle>
+
+							<downloadUrl>https://adoptium.net/temurin/releases</downloadUrl>
+							<supportUrl>https://adoptium.net/support</supportUrl>
+
+							<classPath>
+								<mainClass>${mainClass}</mainClass>
+								<addDependencies>false</addDependencies>
+							</classPath>
+
+							<jre>
+								<minVersion>21</minVersion>
+								<path>%JAVA_HOME%,%PATH%</path>
+								<opts>
+									<opt>-XX:+UseZGC</opt>
+									<opt>-XX:+ZGenerational</opt>
+									<opt>-Xmx128m</opt>
+								</opts>
+							</jre>
+							<versionInfo>
+								<productName>${project.name}</productName>
+								<fileDescription>${project.description}</fileDescription>
+								<fileVersion>${project.version}</fileVersion>
+								<copyright>None</copyright>
+							</versionInfo>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>		
+		</plugins>
+	</build>
+</project>
