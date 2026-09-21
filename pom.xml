@@ -44,7 +44,7 @@
 
 		<maven.executable>mvn</maven.executable>
 		<mainClass>io.github.machineswillrise.jmacs.JMacs</mainClass>
-		<jreHome>${project.build.directory}/${jre}</jreHome>
+		<jreDirectory>jdk-21.0.12.1+1-jre</jreDirectory>
 
 		<javafx.version>27</javafx.version>
 		<langchain4j.version>1.20.0</langchain4j.version>
@@ -191,10 +191,10 @@
 									<goal>wget</goal>
 								</goals>
 								<configuration>
-									<url>https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.12.1+1/OpenJDK21U-jre_x64_windows_hotspot_21.0.12.1_1.msi</url>
-									<sha256>536eeb1dc3f743e5932a92e3549430fc75392c5d379101c1456a1c201aa6e66b</sha256>
+									<url>https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.12.1+1/OpenJDK21U-jre_x64_windows_hotspot_21.0.12.1_1.zip</url>
+									<sha256>d35f31e712f0fcf6ac5a093edc90204fbff22f720ba3950bd09d331d5e621636</sha256>
+									<unpack>true</unpack>
 									<outputDirectory>${project.build.directory}</outputDirectory>
-									<outputFileName>${jre}</outputFileName>
 								</configuration>
 							</execution>
 						</executions>
@@ -228,7 +228,6 @@
 
 			<properties>
 				<jre>openjdk-21-macos</jre>
-				<jreHome>${project.build.directory}/${jre}/jdk-21.0.12.1+1-jre</jreHome>
 			</properties>
 
 			<build>
@@ -247,7 +246,7 @@
 									<url>https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.12.1+1/OpenJDK21U-jre_x64_mac_hotspot_21.0.12.1_1.tar.gz</url>
 									<sha256>6717ec641fd9ce0bb209ca083ee23b42202ac68cb6fcc5753496e0e4a0f41989</sha256>
 									<unpack>true</unpack>
-									<outputDirectory>${project.build.directory}/${jre}</outputDirectory>
+									<outputDirectory>${project.build.directory}</outputDirectory>
 								</configuration>
 							</execution>
 						</executions>
@@ -281,7 +280,6 @@
 
 			<properties>
 				<jre>openjdk-21-linux</jre>
-				<jreHome>${project.build.directory}/${jre}/jdk-21.0.12.1+1-jre</jreHome>
 			</properties>
 
 			<build>
@@ -300,7 +298,7 @@
 									<url>https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.12.1+1/OpenJDK21U-jre_x64_linux_hotspot_21.0.12.1_1.tar.gz</url>
 									<sha256>2413149700df0f7d440500a84a8f764c535f21e5a5e87d38328b64eec2c5b500</sha256>
 									<unpack>true</unpack>
-									<outputDirectory>${project.build.directory}/${jre}</outputDirectory>
+									<outputDirectory>${project.build.directory}</outputDirectory>
 								</configuration>
 							</execution>
 						</executions>
@@ -400,7 +398,7 @@
 							<copyDependencies>false</copyDependencies>
 
 							<bundleJre>true</bundleJre>
-							<jrePath>${jreHome}</jrePath>
+							<jrePath>${project.build.directory}/${jreDirectory}</jrePath>
 
 							<vmArgs>
 								<vmArg>-XX:+UseZGC</vmArg>
