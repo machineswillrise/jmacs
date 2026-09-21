@@ -31,7 +31,6 @@
 		<connection>scm:git:git://github.com/machineswillrise/jmacs.git</connection>
 		<developerConnection>scm:git:ssh://git@github.com:machineswillrise/jmacs.git</developerConnection>
 		<url>https://github.com/machineswillrise/jmacs</url>
-
 	</scm>
 
 	<issueManagement>
@@ -42,8 +41,10 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.release>21</maven.compiler.release>
+
 		<maven.executable>mvn</maven.executable>
 		<mainClass>io.github.machineswillrise.jmacs.JMacs</mainClass>
+		<jreHome>${project.build.directory}/${jre}</jreHome>
 
 		<javafx.version>27</javafx.version>
 		<langchain4j.version>1.20.0</langchain4j.version>
@@ -156,6 +157,7 @@
 					<family>windows</family>
 				</os>
 			</activation>
+
 			<dependencies>
 				<dependency>
 					<groupId>org.openjfx</groupId>
@@ -170,9 +172,35 @@
 					<classifier>win</classifier>
 				</dependency>
 			</dependencies>
+
 			<properties>
 				<maven.executable>./mvnw.cmd</maven.executable>
+				<jre>openjdk-21-jre-windows.msi</jre>
 			</properties>
+
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>io.github.download-maven-plugin</groupId>
+						<artifactId>download-maven-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>download-temurin-windows</id>
+								<phase>initialize</phase>
+								<goals>
+									<goal>wget</goal>
+								</goals>
+								<configuration>
+									<url>https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.12.1+1/OpenJDK21U-jre_x64_windows_hotspot_21.0.12.1_1.msi</url>
+									<sha256>536eeb1dc3f743e5932a92e3549430fc75392c5d379101c1456a1c201aa6e66b</sha256>
+									<outputDirectory>${project.build.directory}</outputDirectory>
+									<outputFileName>${jre}</outputFileName>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
 		</profile>
 
 		<profile>
@@ -182,6 +210,7 @@
 					<family>mac</family>
 				</os>
 			</activation>
+
 			<dependencies>
 				<dependency>
 					<groupId>org.openjfx</groupId>
@@ -196,6 +225,35 @@
 					<classifier>mac</classifier>
 				</dependency>
 			</dependencies>
+
+			<properties>
+				<jre>openjdk-21-macos</jre>
+				<jreHome>${project.build.directory}/${jre}/jdk-21.0.12.1+1-jre</jreHome>
+			</properties>
+
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>io.github.download-maven-plugin</groupId>
+						<artifactId>download-maven-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>download-temurin-macos</id>
+								<phase>initialize</phase>
+								<goals>
+									<goal>wget</goal>
+								</goals>
+								<configuration>
+									<url>https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.12.1+1/OpenJDK21U-jre_x64_mac_hotspot_21.0.12.1_1.tar.gz</url>
+									<sha256>6717ec641fd9ce0bb209ca083ee23b42202ac68cb6fcc5753496e0e4a0f41989</sha256>
+									<unpack>true</unpack>
+									<outputDirectory>${project.build.directory}/${jre}</outputDirectory>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
 		</profile>
 
 		<profile>
@@ -205,6 +263,7 @@
 					<family>unix</family>
 				</os>
 			</activation>
+
 			<dependencies>
 				<dependency>
 					<groupId>org.openjfx</groupId>
@@ -219,6 +278,35 @@
 					<classifier>linux</classifier>
 				</dependency>
 			</dependencies>
+
+			<properties>
+				<jre>openjdk-21-linux</jre>
+				<jreHome>${project.build.directory}/${jre}/jdk-21.0.12.1+1-jre</jreHome>
+			</properties>
+
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>io.github.download-maven-plugin</groupId>
+						<artifactId>download-maven-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>download-temurin-linux</id>
+								<phase>initialize</phase>
+								<goals>
+									<goal>wget</goal>
+								</goals>
+								<configuration>
+									<url>https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.12.1+1/OpenJDK21U-jre_x64_linux_hotspot_21.0.12.1_1.tar.gz</url>
+									<sha256>2413149700df0f7d440500a84a8f764c535f21e5a5e87d38328b64eec2c5b500</sha256>
+									<unpack>true</unpack>
+									<outputDirectory>${project.build.directory}/${jre}</outputDirectory>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
 		</profile>
 
 		<profile>
@@ -263,7 +351,6 @@
 				<version>3.8.0</version>
 				<executions>
 					<execution>
-						<id>make-fat-jar</id>
 						<phase>package</phase>
 						<goals>
 							<goal>single</goal>
@@ -277,20 +364,6 @@
 									<mainClass>${mainClass}</mainClass>
 								</manifest>
 							</archive>
-						</configuration>
-					</execution>
-
-					<execution>
-						<id>make-windows-zip</id>
-						<phase>package</phase>
-						<goals>
-							<goal>single</goal>
-						</goals>
-						<configuration>
-							<descriptors>
-								<descriptor>src/main/assembly/windows-assembly.xml</descriptor>
-							</descriptors>
-							<appendAssemblyId>false</appendAssemblyId>
 						</configuration>
 					</execution>
 				</executions>
@@ -309,66 +382,28 @@
 				<groupId>io.github.download-maven-plugin</groupId>
 				<artifactId>download-maven-plugin</artifactId>
 				<version>2.1.0</version>
+			</plugin>
+
+			<plugin>
+				<groupId>io.github.fvarrui</groupId>
+				<artifactId>javapackager</artifactId>
+				<version>1.7.6</version>
 				<executions>
 					<execution>
-						<phase>initialize</phase>
+						<phase>package</phase>
 						<goals>
-							<goal>wget</goal>
+							<goal>package</goal>
 						</goals>
 						<configuration>
-							<url>https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.12.1+1/OpenJDK21U-jre_x64_windows_hotspot_21.0.12.1_1.msi</url>
-							<sha256>536eeb1dc3f743e5932a92e3549430fc75392c5d379101c1456a1c201aa6e66b</sha256>
-							<outputDirectory>${project.build.directory}</outputDirectory>
-							<outputFileName>openjdk-21-jre-windows.msi</outputFileName>
+							<mainClass>${mainClass}</mainClass>
+							<runnableJar>${project.build.directory}/${project.name}-${project.version}-jar-with-dependencies.jar</runnableJar>
+							<copyDependencies>false</copyDependencies>
+							<bundleJre>true</bundleJre>
+							<jrePath>${jreHome}</jrePath>
 						</configuration>
 					</execution>
 				</executions>
 			</plugin>
-
-			<plugin>
-				<groupId>com.akathist.maven.plugins.launch4j</groupId>
-				<artifactId>launch4j-maven-plugin</artifactId>
-				<version>2.7.0</version>
-				<executions>
-					<execution>
-						<id>l4j-clui</id>
-						<phase>package</phase>
-						<goals>
-							<goal>launch4j</goal>
-						</goals>
-						<configuration>
-							<headerType>gui</headerType>
-							<outfile>${project.build.directory}/${project.name}.exe</outfile>
-							<jar>${project.build.directory}/${project.name}-${project.version}-jar-with-dependencies.jar</jar>
-							<errTitle>${project.name}</errTitle>
-
-							<downloadUrl>https://adoptium.net/temurin/releases</downloadUrl>
-							<supportUrl>https://adoptium.net/support</supportUrl>
-
-							<classPath>
-								<mainClass>${mainClass}</mainClass>
-								<addDependencies>false</addDependencies>
-							</classPath>
-
-							<jre>
-								<minVersion>21</minVersion>
-								<path>%JAVA_HOME%,%PATH%</path>
-								<opts>
-									<opt>-XX:+UseZGC</opt>
-									<opt>-XX:+ZGenerational</opt>
-									<opt>-Xmx128m</opt>
-								</opts>
-							</jre>
-							<versionInfo>
-								<productName>${project.name}</productName>
-								<fileDescription>${project.description}</fileDescription>
-								<fileVersion>${project.version}</fileVersion>
-								<copyright>None</copyright>
-							</versionInfo>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>		
 		</plugins>
 	</build>
 </project>
