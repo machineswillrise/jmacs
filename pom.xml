@@ -398,8 +398,15 @@
 							<mainClass>${mainClass}</mainClass>
 							<runnableJar>${project.build.directory}/${project.name}-${project.version}-jar-with-dependencies.jar</runnableJar>
 							<copyDependencies>false</copyDependencies>
+
 							<bundleJre>true</bundleJre>
 							<jrePath>${jreHome}</jrePath>
+
+							<vmArgs>
+								<vmArg>-XX:+UseZGC</vmArg>
+								<vmArg>-XX:+ZGenerational</vmArg>
+								<vmArg>-Xmx128M</vmArg>
+							</vmArgs>
 						</configuration>
 					</execution>
 				</executions>
