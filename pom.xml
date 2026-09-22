@@ -46,7 +46,7 @@
 		<mainClass>io.github.machineswillrise.jmacs.JMacs</mainClass>
 		<jreDirectory>jdk-21.0.12.1+1-jre</jreDirectory>
 
-		<javafx.version>27</javafx.version>
+		<javafx.version>21.0.12</javafx.version>
 		<langchain4j.version>1.20.0</langchain4j.version>
 	</properties>
 
