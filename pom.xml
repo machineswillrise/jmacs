@@ -41,8 +41,8 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.release>21</maven.compiler.release>
-
 		<maven.executable>mvn</maven.executable>
+
 		<mainClass>io.github.machineswillrise.jmacs.JMacs</mainClass>
 		<jreDirectory>jdk-21.0.12.1+1-jre</jreDirectory>
 
@@ -399,6 +399,18 @@
 
 							<bundleJre>true</bundleJre>
 							<jrePath>${project.build.directory}/${jreDirectory}</jrePath>
+
+							<winConfig>
+								<icoFile>src/main/resources/icons/jmacs.ico</icoFile>
+							</winConfig>
+
+							<linuxConfig>
+								<pngFile>src/main/resources/icons/jmacs.png</pngFile>
+								<generateAppImage>false</generateAppImage>
+								<categories>
+									<category>Development</category>
+								</categories>
+							</linuxConfig>
 
 							<vmArgs>
 								<vmArg>-XX:+UseZGC</vmArg>
