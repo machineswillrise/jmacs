@@ -10,7 +10,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class JMacs extends Application
+public class Jmacs extends Application
 {
 	@Override
 	public void start(Stage primaryStage)
@@ -18,7 +18,7 @@ public class JMacs extends Application
 		Pane root = new AnchorPane();
 		Scene scene = new Scene(root, 800, 600);
 
-		primaryStage.setTitle("JMacs");
+		primaryStage.setTitle("Jmacs");
 		primaryStage.setScene(scene);
 		primaryStage.setMaximized(true);
 		primaryStage.getIcons().add(
