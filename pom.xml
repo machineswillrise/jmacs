@@ -46,6 +46,7 @@
 		<mainClass>io.github.machineswillrise.jmacs.Jmacs</mainClass>
 		<jreDirectory>jdk-21.0.12.1+1-jre</jreDirectory>
 
+		<jackson.version>3.2.3</jackson.version>
 		<javafx.version>21.0.12</javafx.version>
 		<langchain4j.version>1.20.0</langchain4j.version>
 	</properties>
@@ -91,7 +92,13 @@
 		<dependency>
 			<groupId>tools.jackson.core</groupId>
 			<artifactId>jackson-core</artifactId>
-			<version>3.2.3</version>
+			<version>${jackson.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>tools.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>${jackson.version}</version>
 		</dependency>
 
 		<dependency>
@@ -171,6 +178,7 @@
 					<version>${javafx.version}</version>
 					<classifier>win</classifier>
 				</dependency>
+
 				<dependency>
 					<groupId>org.openjfx</groupId>
 					<artifactId>javafx-controls</artifactId>
@@ -224,6 +232,7 @@
 					<version>${javafx.version}</version>
 					<classifier>mac</classifier>
 				</dependency>
+
 				<dependency>
 					<groupId>org.openjfx</groupId>
 					<artifactId>javafx-controls</artifactId>
@@ -276,6 +285,7 @@
 					<version>${javafx.version}</version>
 					<classifier>linux</classifier>
 				</dependency>
+
 				<dependency>
 					<groupId>org.openjfx</groupId>
 					<artifactId>javafx-controls</artifactId>
@@ -407,11 +417,16 @@
 							<jrePath>${project.build.directory}/${jreDirectory}</jrePath>
 
 							<winConfig>
-								<icoFile>src/main/resources/icons/${project.name}.ico</icoFile>
+								<icoFile>src/main/resources/icons/jmacs.ico</icoFile>
 							</winConfig>
 
+							<macConfig>
+								<icnsFile>src/main/resources/icons/jmacs.icns</icnsFile>
+								<generatePkg>false</generatePkg>
+							</macConfig>
+
 							<linuxConfig>
-								<pngFile>src/main/resources/icons/${project.name}.png</pngFile>
+								<pngFile>src/main/resources/icons/jmacs.png</pngFile>
 								<generateAppImage>false</generateAppImage>
 								<categories>
 									<category>Development</category>
