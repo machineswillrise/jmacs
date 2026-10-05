@@ -1,5 +1,6 @@
 package io.github.machineswillrise.jmacs;
 
+import java.util.ArrayList;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
@@ -29,7 +30,6 @@ public class JmacsExceptionHandlerTest
 		Platform.runLater(() ->
 		{
 			JmacsExceptionHandler handler = new JmacsExceptionHandler();
-			handler.uncaughtException(Thread.currentThread(), new RuntimeException("Test exception"));
 
 			new Thread(() ->
 			{
@@ -38,7 +38,7 @@ public class JmacsExceptionHandlerTest
 					Thread.sleep(500);
 					Platform.runLater(() ->
 					{
-						for (Window w : Window.getWindows())
+						for (Window w : new ArrayList<>(Window.getWindows()))
 						{
 							if (w instanceof Stage stage)
 							{
@@ -54,6 +54,8 @@ public class JmacsExceptionHandlerTest
 					Thread.currentThread().interrupt();
 				}
 			}).start();
+
+			handler.uncaughtException(Thread.currentThread(), new RuntimeException("Test exception"));
 		});
 
 		assertTrue(latch.await(5, TimeUnit.SECONDS));
