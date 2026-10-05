@@ -64,7 +64,7 @@ public class JmacsExceptionHandler implements Thread.UncaughtExceptionHandler
 				{
 					Alert openError = new Alert(AlertType.ERROR);
 					openError.setTitle("Open Error");
-					openError.setHeaderText("The issue page could noot be opened.");
+					openError.setHeaderText("The issue page could not be opened.");
 					openError.setContentText("You can access it directly at " + issuePage);
 				}
 			}
