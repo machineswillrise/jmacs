@@ -48,6 +48,7 @@ public class JmacsExceptionHandler implements Thread.UncaughtExceptionHandler
 
 		logoView.setFitWidth(64);
 		logoView.setFitHeight(64);
+		error.setGraphic(logoView);
 
 		Optional<ButtonType> result = error.showAndWait();
 		if (result.isPresent())
@@ -66,6 +67,7 @@ public class JmacsExceptionHandler implements Thread.UncaughtExceptionHandler
 					openError.setTitle("Open Error");
 					openError.setHeaderText("The issue page could not be opened.");
 					openError.setContentText("You can access it directly at " + issuePage);
+					openError.getButtonTypes().setAll(ButtonType.OK);
 				}
 			}
 
