@@ -28,7 +28,7 @@ public class ConfigController
 		return Path.of(System.getProperty("user.home"), ".config", "jmacs");
 	}
 
-	public Properties loadConfig() throws IOException
+	public Properties loadConfigFile() throws IOException
 	{
 		Path configDirectory = findConfigDirectory();
 		String configFileName = configDirectory.toString() + "/" + "config.properties";
