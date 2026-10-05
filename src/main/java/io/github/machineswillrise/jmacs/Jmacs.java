@@ -4,7 +4,7 @@ import javafx.application.Application;
 
 import javafx.scene.image.Image;
 
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 
 import javafx.scene.Scene;
@@ -15,7 +15,7 @@ public class Jmacs extends Application
 	@Override
 	public void start(Stage primaryStage)
 	{
-		Pane root = new AnchorPane();
+		Pane root = new BorderPane();
 		Scene scene = new Scene(root, 800, 600);
 
 		primaryStage.setTitle("Jmacs");
@@ -25,6 +25,8 @@ public class Jmacs extends Application
 			new Image(getClass().getResourceAsStream("/icons/jmacs.png"))
 		);
 
+		// a dialog window will be created when fatal errors occur
+		Thread.setDefaultUncaughtExceptionHandler(new JmacsExceptionHandler());
 		primaryStage.show();
 	}
 

@@ -8,6 +8,10 @@ public record Config(
 	BooleanProperty detectIndentation,
 	IntegerProperty indentationSize,
 
+	// Indentation guide settings
+	BooleanProperty showIndentationGuide,
+	IntegerProperty indentationGuideLocation,
+
 	// Feature settings
 	BooleanProperty enableLSP,
 	BooleanProperty enableTabCompletions,
@@ -24,9 +28,14 @@ public record Config(
 			new SimpleBooleanProperty(true), 
 			new SimpleBooleanProperty(true),
 			new SimpleIntegerProperty(8),
+
+			new SimpleBooleanProperty(true),
+			new SimpleIntegerProperty(120),
+
 			new SimpleBooleanProperty(true),
 			new SimpleBooleanProperty(true),
 			new SimpleBooleanProperty(true),
+
 			new SimpleBooleanProperty(true),
 			new SimpleStringProperty("#BF5AF2")
 		);
