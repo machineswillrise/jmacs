@@ -39,8 +39,8 @@ public class JmacsExceptionHandler implements Thread.UncaughtExceptionHandler
 		error.setHeaderText("Sorry! Jmacs has crashed due to a critical error.");
 		error.setContentText("Error: " + e.getMessage());
 
-		var openGithubIssues = new ButtonType("Open GitHub Issues");
-		var copyStackTrace = new ButtonType("Copy Stack Trace");
+		ButtonType openGithubIssues = new ButtonType("Open GitHub Issues");
+		ButtonType copyStackTrace = new ButtonType("Copy Stack Trace");
 		error.getButtonTypes().setAll(copyStackTrace, openGithubIssues, ButtonType.CLOSE);
 
 		Image logo = new Image(getClass().getResourceAsStream("/icons/jmacs.png"));
